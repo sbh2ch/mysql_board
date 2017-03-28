@@ -69,6 +69,9 @@ public class BoardController {
 
 	@RequestMapping("boardDelete.do")
 	public String delete(HttpServletRequest req, Model model) {
-		return "";
+		model.addAttribute("req", req);
+		boardService.delete(model);
+		
+		return "redirect:./list.do";
 	}
 }

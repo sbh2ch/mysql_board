@@ -28,14 +28,11 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public List<BoardVO> list() {
-		System.out.println("list");
-
 		return session.selectList("com.son.board00.boardMapper.list");
 	}
 
 	@Override
 	public BoardVO view(String b_no) {
-		System.out.println("detail : " + b_no);
 		return session.selectOne("com.son.board00.boardMapper.view", b_no);
 	}
 
@@ -46,7 +43,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void delete(String b_no) {
-		session.delete("com.son.board00.boardMapper.delete", new BoardVO());
+		session.delete("com.son.board00.boardMapper.delete", b_no);
 	}
 
 	@Override

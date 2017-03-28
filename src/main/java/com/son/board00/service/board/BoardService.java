@@ -23,7 +23,7 @@ public interface BoardService {
 
 	public BoardVO selectOne(String b_no);
 
-	public void delete(String b_no);
+	public void delete(Model model);
 
 	public void update(Model model);
 

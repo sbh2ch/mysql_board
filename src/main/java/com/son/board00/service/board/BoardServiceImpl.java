@@ -41,7 +41,16 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void delete(String b_no) {
+	public void delete(Model model) {
+		HttpServletRequest req = (HttpServletRequest) model.asMap().get("req");
+		MemberVO user = (MemberVO) req.getSession().getAttribute("user");
+		String b_no = req.getParameter("b_no");
+		
+		/* 작성자와 세션 일치하는지 검사 */
+		if (!user.getEmail().equals(boardDao.view(b_no).getEmail()))
+			return;
+		
+		boardDao.delete(b_no);
 	}
 
 	@Override
