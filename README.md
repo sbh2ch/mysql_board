@@ -65,3 +65,4 @@ This project runs in these enviroments below:
 > * Spring 3.1
 > * JDK 8
 > * MAVEN
+> * Tomcat 8
