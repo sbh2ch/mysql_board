@@ -3,5 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.son.board00.memberMapper">
-
+	<select id="selectOne" resultType="com.son.board00.vo.member.MemberVO">
+		select name, email from m0328 where email = #{email} and pw = #{pw}
+	</select>
 </mapper>

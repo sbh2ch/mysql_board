@@ -22,6 +22,8 @@ public class BoardVO {
 	private Date reg_date;
 	private int reply_cnt;
 
+	public BoardVO() {
+	}
 
 	public BoardVO(String name, String email, String title, String content) {
 		this.name = name;

@@ -6,8 +6,9 @@ package com.son.board00.vo.member;
  *    |_ MemberVO.java
  * 
  * </pre>
+ * 
  * @date : 2017. 3. 28. 오후 1:48:09
- * @version : 
+ * @version :
  * @author : kiost
  */
 public class MemberVO {
@@ -17,6 +18,11 @@ public class MemberVO {
 	private String pw;
 
 	public MemberVO() {
+	}
+
+	public MemberVO(String email, String pw) {
+		this.email = email;
+		this.pw = pw;
 	}
 
 	public int getM_no() {

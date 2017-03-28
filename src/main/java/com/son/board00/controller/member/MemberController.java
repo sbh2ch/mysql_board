@@ -16,25 +16,29 @@ import com.son.board00.service.member.MemberService;
  *    |_ MemberController.java
  * 
  * </pre>
+ * 
  * @date : 2017. 3. 28. 오후 1:52:10
- * @version : 
+ * @version :
  * @author : kiost
  */
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	
+
 	@RequestMapping("/login.do")
-	public String login(HttpServletRequest req, Model model){
-		
+	public String login(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
+		memberService.login(model);
+
 		return "redirect:./list.do";
 	}
+
 	@RequestMapping("/logout.do")
-	public String logout(HttpServletRequest req, Model model){
+	public String logout(HttpServletRequest req, Model model) {
 		model.addAttribute("session", req.getSession());
-		
-		
+		memberService.logout(model);
+
 		return "redirect:./list.do";
 	}
 }

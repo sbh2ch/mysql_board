@@ -1,7 +1,7 @@
 
 package com.son.board00.dao.member; 
 
-import org.apache.log4j.Logger;
+import com.son.board00.vo.member.MemberVO;
 
 /**
  * <pre>
@@ -14,5 +14,5 @@ import org.apache.log4j.Logger;
  * @author : kiost
  */
 public interface MemberDAO {
-	public void selectOne();
+	public MemberVO selectOne(String email, String pw);
 }
