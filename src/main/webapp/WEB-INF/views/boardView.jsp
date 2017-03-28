@@ -39,7 +39,7 @@
 			</c:if>
 		</table>
 		<c:if test="${user.email == b.email}">
-			<a href="./boardModify.do?b_no=${b.b_no}">modify</a>
+			<a href="./boardModifyForm.do?b_no=${b.b_no}">modify</a>
 			<a href="./boardDelete.do?b_no=${b.b_no}">delete</a>
 		</c:if>
 	</div>

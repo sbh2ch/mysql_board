@@ -18,11 +18,11 @@
 			<table border="1">
 				<tr>
 					<td>title</td>
-					<td><input type="text" name="title" value="${b.title}" required></td>
+					<td><input type="text" name="title" value="<c:out value="${b.title}"/>" required></td>
 				</tr>
 				<tr>
 					<td>content</td>
-					<td><textarea rows="20" cols="40" name="content" required>${b.content}</textarea></td>
+					<td><textarea rows="20" cols="40" name="content" required><c:out value="${b.content}"/></textarea></td>
 				</tr>
 			</table>
 			<input type="submit" value="modify">

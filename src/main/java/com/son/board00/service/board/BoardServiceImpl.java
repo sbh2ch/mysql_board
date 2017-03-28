@@ -46,7 +46,17 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void update(Model model) {
+		HttpServletRequest req = (HttpServletRequest) model.asMap().get("req");
+		MemberVO user = (MemberVO) req.getSession().getAttribute("user");
+		String b_no = req.getParameter("b_no");
+		String title = req.getParameter("title").replaceAll("'", "\"");
+		String content = req.getParameter("content").replaceAll("'", "\"");
 		
+		/* 작성자와 세션 일치하는지 검사 */
+		if (!user.getEmail().equals(boardDao.view(b_no).getEmail()))
+			return;
+		
+		boardDao.updateBoard(b_no, title, content);
 	}
 
 	@Override

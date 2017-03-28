@@ -11,11 +11,15 @@
 		select * from b0328 where b_no = #{b_no}
 	</select>
 	
-	<insert id="writeBoard" parameterType="com.son.board00.vo.board.BoardVO">
+	<insert id="write" parameterType="com.son.board00.vo.board.BoardVO">
 		insert into b0328 values(null, #{name}, #{email}, #{title}, #{content}, NOW(), 0)
 	</insert>
 	
-	<delete id="delete">
-		
+	<delete id="delete" parameterType="String">
+		delete from b0328 where b_no = #{b_no}
 	</delete>
+	
+	<update id="update" parameterType="com.son.board00.vo.board.BoardVO">
+		update b0328 set title = #{title}, content = #{content} where b_no = #{b_no}
+	</update>
 </mapper>

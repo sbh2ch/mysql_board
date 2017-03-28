@@ -25,6 +25,13 @@ public class BoardVO {
 	public BoardVO() {
 	}
 
+	public BoardVO(int b_no, String title, String content) {
+		super();
+		this.b_no = b_no;
+		this.title = title;
+		this.content = content;
+	}
+
 	public BoardVO(String name, String email, String title, String content) {
 		this.name = name;
 		this.email = email;

@@ -24,5 +24,5 @@ public interface BoardDAO {
 
 	public void delete(String b_no);
 	
-	public void updateBoard();
+	public void updateBoard(String b_no, String title, String content);
 }

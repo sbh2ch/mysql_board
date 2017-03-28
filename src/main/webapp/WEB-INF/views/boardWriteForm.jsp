@@ -13,7 +13,7 @@
 		<div id="header">
 			<%@ include file="./attach/header.jsp"%>
 		</div>
-		<form action="./boardWrite.do" method="post" accept-charset="utf-8">
+		<form action="./boardWrite.do" method="post" accept-charset="utf-8"	>
 			<table border="1">
 				<tr>
 					<td>title</td>

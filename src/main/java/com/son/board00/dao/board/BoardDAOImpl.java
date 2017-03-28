@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.son.board00.vo.board.BoardVO;
-import com.son.board00.vo.member.MemberVO;
 
 /**
  * <pre>
@@ -42,15 +41,17 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void writeBoard(String name, String email, String title, String content) {
-		session.insert("com.son.board00.boardMapper.writeBoard", new BoardVO(name, email, title, content));
+		session.insert("com.son.board00.boardMapper.write", new BoardVO(name, email, title, content));
 	}
 
 	@Override
 	public void delete(String b_no) {
+		session.delete("com.son.board00.boardMapper.delete", new BoardVO());
 	}
 
 	@Override
-	public void updateBoard() {
+	public void updateBoard(String b_no, String title, String content) {
+		session.update("com.son.board00.boardMapper.update", new BoardVO(Integer.parseInt(b_no), title, content));
 	}
 
 }
