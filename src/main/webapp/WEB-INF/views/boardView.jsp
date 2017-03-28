@@ -25,7 +25,7 @@
 			</tr>
 			<tr>
 				<td>title</td>
-				<td><c:out value="${b.title }"/></td>
+				<td><c:out value="${b.title}"/></td>
 			</tr>
 			<tr>
 				<td>content</td>

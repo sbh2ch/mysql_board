@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.son.board00.boardMapper">
+	<select id="list" resultType="com.son.board00.vo.board.BoardVO">
+		select b_no, name, email, title, content, reg_date, reply_cnt from b0328 order by b_no desc
+	</select>
+	
+	<select id="view" resultType="com.son.board00.vo.board.BoardVO" parameterType="String">
+		select * from b0328 where b_no = #{b_no}
+	</select>
+	
+	<insert id="writeBoard" parameterType="com.son.board00.vo.board.BoardVO">
+		insert into b0328 values(null, #{name}, #{email}, #{title}, #{content}, NOW(), 0)
+	</insert>
+	
+	<select id="login">
+		
+	</select>
+	
+	<delete id="delete">
+		
+	</delete>
+</mapper>
