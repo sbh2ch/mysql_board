@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.son.board00.dao.member.MemberDAO;
+import com.son.board00.vo.member.MemberVO;
 
 /**
  * <pre>
@@ -34,7 +35,10 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("email : "+ email);
 		System.out.println("pword : "+ pw);
 		
-		req.getSession().setAttribute("user", memberDao.selectOne(req.getParameter("email").replaceAll("'", "\""), req.getParameter("password").replaceAll("'", "\"")));
+		MemberVO user = memberDao.selectOne(req.getParameter("email").replaceAll("'", "\""), req.getParameter("password").replaceAll("'", "\""));
+		
+		if(user != null)
+			req.getSession().setAttribute("user", user);
 	}
 
 	@Override

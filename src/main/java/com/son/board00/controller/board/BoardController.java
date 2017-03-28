@@ -30,7 +30,7 @@ public class BoardController {
 	public String list(Model model) {
 		model.addAttribute("bList", boardService.selectAll());
 
-		return "./boardList";
+		return "./boardList";	
 	}
 
 	@RequestMapping("boardView.do")
@@ -44,15 +44,14 @@ public class BoardController {
 	public String boardWriteForm() {
 		return "./boardWriteForm";
 	}
-	
+
 	@RequestMapping("boardWrite.do")
-	public String boardWrite(HttpServletRequest req, Model model){
-		model.addAttribute("req",req);
+	public String boardWrite(HttpServletRequest req, Model model) {
+		model.addAttribute("req", req);
 		boardService.write(model);
-		
-		return "redirect:./boardList";
+
+		return "redirect:./list.do";
 	}
-	
 
 	@RequestMapping("boardModifyForm.do")
 	public String boardModifyForm(HttpServletRequest req, Model model) {
@@ -62,7 +61,10 @@ public class BoardController {
 
 	@RequestMapping("boardModify.do")
 	public String modify(HttpServletRequest req, Model model) {
-		return "";
+		model.addAttribute("req",req);
+		boardService.update(model);
+		
+		return "redirect:./list.do";
 	}
 
 	@RequestMapping("boardDelete.do")

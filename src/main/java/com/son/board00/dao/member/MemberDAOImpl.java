@@ -27,5 +27,4 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO selectOne(String email, String pw) {
 		return session.selectOne("com.son.board00.memberMapper.selectOne", new MemberVO(email, pw));
 	}
-
 }

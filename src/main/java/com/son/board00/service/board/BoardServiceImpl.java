@@ -46,6 +46,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void update(Model model) {
+		
 	}
 
 	@Override

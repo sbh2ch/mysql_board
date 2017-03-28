@@ -43,16 +43,14 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void writeBoard(String name, String email, String title, String content) {
 		session.insert("com.son.board00.boardMapper.writeBoard", new BoardVO(name, email, title, content));
-		session.commit();
-	}
-
-	@Override
-	public MemberVO login(String email, String password) {
-		return null;
 	}
 
 	@Override
 	public void delete(String b_no) {
+	}
+
+	@Override
+	public void updateBoard() {
 	}
 
 }

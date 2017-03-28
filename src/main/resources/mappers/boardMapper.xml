@@ -15,10 +15,6 @@
 		insert into b0328 values(null, #{name}, #{email}, #{title}, #{content}, NOW(), 0)
 	</insert>
 	
-	<select id="login">
-		
-	</select>
-	
 	<delete id="delete">
 		
 	</delete>

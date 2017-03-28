@@ -22,7 +22,7 @@ public interface BoardDAO {
 
 	public void writeBoard(String name, String email, String title, String content);
 
-	public MemberVO login(String email, String password);
-
 	public void delete(String b_no);
+	
+	public void updateBoard();
 }
