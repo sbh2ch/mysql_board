@@ -32,8 +32,6 @@ public class MemberServiceImpl implements MemberService {
 		HttpServletRequest req = (HttpServletRequest) model.asMap().get("req");
 		String email = req.getParameter("email").replaceAll("'", "\"");
 		String pw = req.getParameter("password").replaceAll("'", "\"");
-		System.out.println("email : "+ email);
-		System.out.println("pword : "+ pw);
 		
 		MemberVO user = memberDao.selectOne(req.getParameter("email").replaceAll("'", "\""), req.getParameter("password").replaceAll("'", "\""));
 		

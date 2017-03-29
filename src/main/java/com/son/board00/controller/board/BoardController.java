@@ -26,6 +26,25 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	/**
+	 * <pre>
+	 * 1. 개요 : 글 리스트 불러오기
+	 * 2. 처리내용 : 
+	 * 		1) 전체 글 목록 불러오기
+	 * </pre>
+	 * @Method Name : list
+	 * @date : 2017. 3. 28.
+	 * @author : kiost
+	 * @history : 
+	 *	-----------------------------------------------------------------------
+	 *	변경일				작성자						변경내용  
+	 *	----------- ------------------- ---------------------------------------
+	 *	2017. 3. 28.		kiost				최초 작성 
+	 *	-----------------------------------------------------------------------
+	 * 
+	 * @param model
+	 * @return
+	 */ 	
 	@RequestMapping("list.do")
 	public String list(Model model) {
 		model.addAttribute("bList", boardService.selectAll());
@@ -33,6 +52,28 @@ public class BoardController {
 		return "./boardList";	
 	}
 
+	/**
+	 * <pre>
+	 * 1. 개요 : 글 하나 불러오기
+	 * 2. 처리내용 : 
+	 * 		1) b_no 파라미터 받음
+	 * 		2) 해당 번호의 글 불러옴
+	 * 		3) view 페이지로 전달
+	 * </pre>
+	 * @Method Name : view
+	 * @date : 2017. 3. 28.
+	 * @author : kiost
+	 * @history : 
+	 *	-----------------------------------------------------------------------
+	 *	변경일				작성자						변경내용  
+	 *	----------- ------------------- ---------------------------------------
+	 *	2017. 3. 28.		kiost				최초 작성 
+	 *	-----------------------------------------------------------------------
+	 * 
+	 * @param req
+	 * @param model
+	 * @return
+	 */ 	
 	@RequestMapping("boardView.do")
 	public String view(HttpServletRequest req, Model model) {
 		model.addAttribute("b", boardService.selectOne(req.getParameter("b_no")));
@@ -40,6 +81,23 @@ public class BoardController {
 		return "./boardView";
 	}
 
+	/**
+	 * <pre>
+	 * 1. 개요 : 
+	 * 2. 처리내용 : 
+	 * </pre>
+	 * @Method Name : boardWriteForm
+	 * @date : 2017. 3. 28.
+	 * @author : kiost
+	 * @history : 
+	 *	-----------------------------------------------------------------------
+	 *	변경일				작성자						변경내용  
+	 *	----------- ------------------- ---------------------------------------
+	 *	2017. 3. 28.		kiost				최초 작성 
+	 *	-----------------------------------------------------------------------
+	 * 
+	 * @return
+	 */ 	
 	@RequestMapping("boardWriteForm.do")
 	public String boardWriteForm() {
 		return "./boardWriteForm";
