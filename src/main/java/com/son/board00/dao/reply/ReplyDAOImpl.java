@@ -32,12 +32,12 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public void update(String r_no, String content) {
-		System.out.println("update dao > " + content);
 		session.update("com.son.board00.replyMapper.update", new ReplyVO(Integer.parseInt(r_no), content));
 	}
 
 	@Override
 	public void delete(String r_no) {
+		session.delete("com.son.board00.replyMapper.delete", r_no);
 	}
 
 	@Override

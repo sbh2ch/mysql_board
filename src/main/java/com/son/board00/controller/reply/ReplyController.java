@@ -66,7 +66,6 @@ public class ReplyController {
 
 	@RequestMapping("reply_mod_ajax.do")
 	public void modReply(HttpServletRequest req, HttpServletResponse res, Model model) {
-		System.out.println("update ctr");
 		model.addAttribute("req", req);
 		replyService.modify(model);
 		
@@ -75,5 +74,18 @@ public class ReplyController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping("reply_del_ajax.do")
+	public void deleteReply(HttpServletRequest req, HttpServletResponse res, Model model){
+		model.addAttribute("req", req);
+		replyService.delete(model);
+		
+		try {
+			res.getWriter().print("{}");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

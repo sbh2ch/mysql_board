@@ -76,22 +76,20 @@
 	<script src="http://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var selectNum;
-		var b_no = "${b.b_no}";
-		var replyListUp = function(b_no) {
+		var replyListUp = function() {
 			var $replyBody = $("#replyBody");
-			console.log("listup b_no > > > > ", b_no);
 			$.ajax({
 				url : "reply_list_ajax.do",
 				type : "post",
 				datatype : 'json',
 				data : {
-					"b_no" : b_no,
+					"b_no" : "${b.b_no}",
 				},
 				success : function(data) {
-					console.log('success');
 					$replyBody.html(data);
 					bindModBtn();
 					$(".replyModCls > button").bind("click", bindModSubmitBtn);
+					$(".replyDelBtn").bind("click", bindDelBtn);
 				},
 				error : function(request, status, error) {
 					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -108,7 +106,6 @@
 		}
 
 		var bindModSubmitBtn = function() {
-			console.log("mod b_no > > > > ", b_no);
 			$.ajax({
 				url : "reply_mod_ajax.do",
 				type : "post",
@@ -119,8 +116,22 @@
 					"r_no" : selectNum
 				},
 				success : function(data) {
-					replyListUp(b_no);
-					console.log('okay');
+					replyListUp();
+				}
+			});
+		}
+
+		var bindDelBtn = function() {
+			$.ajax({
+				url : "reply_del_ajax.do",
+				type : "post",
+				datatype : 'json',
+				data : {
+					"email" : "${user.email}",
+					"r_no" : $(this).val()
+				},
+				success : function(data) {
+					replyListUp();
 				}
 			});
 		}
@@ -133,17 +144,17 @@
 				data : {
 					"email" : "${user.email}",
 					"content" : $("#replyContent").val(),
-					"b_no" : b_no
+					"b_no" : "${b.b_no}"
 				},
 				success : function(data) {
-					replyListUp(b_no);
+					replyListUp();
 				}
 			});
 		}
 
 		$(document).ready(function() {
 			$("#replyBtn").bind("click", replyWrite);
-			replyListUp(b_no);
+			replyListUp();
 		});
 	</script>
 </body>

@@ -15,6 +15,10 @@
 		update r0328 set content = #{content} where r_no = #{r_no}
 	</update>
 	
+	<delete id="delete" parameterType="String">
+		delete from r0328 where r_no = #{r_no}
+	</delete>
+	
 	<select id="selectEmailbyRno" parameterType="String" resultType="String">
 		select email from r0328 where r_no = #{r_no}
 	</select>

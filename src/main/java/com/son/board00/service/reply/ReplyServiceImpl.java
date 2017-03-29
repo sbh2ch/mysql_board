@@ -51,7 +51,6 @@ public class ReplyServiceImpl implements ReplyService {
 		String email = req.getParameter("email");
 		String content = req.getParameter("content").replaceAll("'", "\""); /* Injection 방지 */
 
-		System.out.println("update svc > " + content);
 		if (user != null && user.getEmail().equals(email) && email.equals(replyDao.selectEmailByRno(r_no)))
 			replyDao.update(r_no, content);
 	}
@@ -66,6 +65,14 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Override
 	public void delete(Model model) {
+		HttpServletRequest req = (HttpServletRequest) model.asMap().get("req");
+		MemberVO user = (MemberVO) req.getSession().getAttribute("user");
+		
+		String r_no = req.getParameter("r_no");
+		String email = req.getParameter("email");
+		
+		if (user != null && user.getEmail().equals(email) && email.equals(replyDao.selectEmailByRno(r_no)))
+			replyDao.delete(r_no);
 	}
 
 	public String makeReplyHtml(List<ReplyVO> list, String userEmail) {
@@ -85,7 +92,7 @@ public class ReplyServiceImpl implements ReplyService {
 			html += "<td>";
 			if (list.get(i).getEmail().equals(userEmail)) {
 				html += "<button type='button' class='replyModBtn' value='" + list.get(i).getR_no() + "'>mod</button>";
-				html += "<a href='list.do'>del</a>";
+				html += "<button type='button' class='replyDelBtn' value='" + list.get(i).getR_no() + "'>del</a>";
 			}
 			html += "</td>";
 			html += "</tr>";
