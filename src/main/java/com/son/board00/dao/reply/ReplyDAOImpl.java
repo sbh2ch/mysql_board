@@ -32,6 +32,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public void update(String r_no, String content) {
+		System.out.println("update dao > " + content);
+		session.update("com.son.board00.replyMapper.update", new ReplyVO(Integer.parseInt(r_no), content));
 	}
 
 	@Override
@@ -46,6 +48,11 @@ public class ReplyDAOImpl implements ReplyDAO {
 	@Override
 	public List<ReplyVO> selectAllbyBno(String b_no) {
 		return session.selectList("com.son.board00.replyMapper.selectAllbyBno", b_no);
+	}
+
+	@Override
+	public String selectEmailByRno(String r_no) {
+		return session.selectOne("com.son.board00.replyMapper.selectEmailbyRno", r_no);
 	}
 
 }

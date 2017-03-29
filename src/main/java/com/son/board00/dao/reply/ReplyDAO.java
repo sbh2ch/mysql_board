@@ -26,4 +26,6 @@ public interface ReplyDAO {
 	public ReplyVO selectOne(String r_no);
 
 	public List<ReplyVO> selectAllbyBno(String b_no);
+	
+	public String selectEmailByRno(String r_no);
 }

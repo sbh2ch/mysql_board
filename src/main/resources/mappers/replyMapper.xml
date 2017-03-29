@@ -10,4 +10,12 @@
 	<select id="selectAllbyBno" resultType="com.son.board00.vo.reply.ReplyVO" parameterType="String">
 		select * from r0328 where b_no = #{b_no} order by r_no asc
 	</select>
+	
+	<update id="update" parameterType="com.son.board00.vo.reply.ReplyVO">
+		update r0328 set content = #{content} where r_no = #{r_no}
+	</update>
+	
+	<select id="selectEmailbyRno" parameterType="String" resultType="String">
+		select email from r0328 where r_no = #{r_no}
+	</select>
 </mapper>

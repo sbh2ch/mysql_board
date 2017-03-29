@@ -58,101 +58,92 @@
 			</form>
 		</div>
 		<div id="replyList">
-			<table border="1">
-				<thead>
-					<tr>
-						<th>writer</th>
-						<th>comment</th>
-						<th>reg_date</th>
-						<th>mod/del</th>
-					</tr>
-				</thead>
-				<tbody id="replyBody">
-				</tbody>
-			</table>
-
+			<form action="" name="modForm">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>writer</th>
+							<th>comment</th>
+							<th>reg_date</th>
+							<th>mod/del</th>
+						</tr>
+					</thead>
+					<tbody id="replyBody">
+					</tbody>
+				</table>
+			</form>
 		</div>
 	</div>
 	<!-- JQuery Version 3.1.0 CDN -->
-	<script src="http://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<script src="http://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$replyBody = $("#replyBody");
+		var selectNum;
+		var replyListUp = function() {
+			var $replyBody = $("#replyBody");
+
 			$.ajax({
 				url : "reply_list_ajax.do",
 				type : "post",
 				datatype : 'json',
 				data : {
-					"b_no" : "${b.b_no}"
+					"b_no" : "${b.b_no}",
 				},
-				success : function(responseData) {
-					var data = JSON.parse(responseData);
-					if (!data) {
-						return false;
-					}
-					var html = '';
-					for (var i = 0; i < data.length; i++) {
-						html += "<tr>";
-						html += "<td>";
-						html += data[i].name;
-						html += "</td>";
-						html += "<td>";
-						html += data[i].content;
-						html += "</td>";
-						html += "<td>";
-						html += data[i].reg_date;
-						html += "</td>";
-						html += "<td>";
-						if (data[i].email === "${user.email}") {
-							html += "<button type='button' class='replyModBtn' value='"+data[i].b_no+"'>mod</button>"
-							html += "<a href='list.do'>del</a>"
-						}
-						html += "</td>";
-						html += "</tr>";
-					}
-					$replyBody.html(html);
+				success : function(data) {
+					console.log('success');
+					$replyBody.html(data);
+					bindModBtn();
+					$(".replyModCls > button").bind("click", bindModSubmitBtn);
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 				}
 			});
-			
-			$("#replyBtn").bind("click", function() {
-				$.ajax({
-					url : "reply_write_ajax.do",
-					type : "post",
-					datatype : 'json',
-					data : {
-						"email" : "${user.email}",
-						"content" : $("#replyContent").val(),
-						"b_no" : "${b.b_no}"
-					},
-					success : function(responseData) {
-						var data = JSON.parse(responseData);
-						if (!data) {
-							return false;
-						}
-						var html = '';
-						for (var i = 0; i < data.length; i++) {
-							html += "<tr>";
-							html += "<td>";
-							html += data[i].name;
-							html += "</td>";
-							html += "<td>";
-							html += data[i].content;
-							html += "</td>";
-							html += "<td>";
-							html += data[i].reg_date;
-							html += "</td>";
-							html += "<td>";
-							if (data[i].email === "${user.email}") {
-								html += "<button type='button' class='replyModBtn' value='"+data[i].b_no+"'>mod</button>"
-								html += "<a href='list.do'>del</a>"
-							}
-							html += "</td>";
-							html += "</tr>";
-						}
-						$replyBody.html(html);
-					}
-				});
+		}
+
+		var bindModBtn = function() {
+			$(".replyModBtn").bind("click", function() {
+				selectNum = $(this).val();
+				$(".replyModCls").css("display", "none");
+				$("#replyModInput" + selectNum).css("display", "block");
 			});
+		}
+
+		var bindModSubmitBtn = function() {
+			console.log('clicked = >', $("#replyModInput" + selectNum).children().first().val());
+			$.ajax({
+				url : "reply_mod_ajax.do",
+				type : "post",
+				datatype : 'json',
+				data : {
+					"email" : "${user.email}",
+					"content" : $("#replyModInput" + selectNum).children().first().val(),
+					"r_no" : selectNum
+				},
+				success : function(data) {
+					replyListUp();
+				}
+			});
+		}
+
+		var replyWrite = function() {
+			$.ajax({
+				url : "reply_write_ajax.do",
+				type : "post",
+				datatype : 'json',
+				data : {
+					"email" : "${user.email}",
+					"content" : $("#replyContent").val(),
+					"b_no" : "${b.b_no}"
+				},
+				success : function(data) {
+					replyListUp();
+				}
+			});
+		}
+
+		$(document).ready(function() {
+			$("#replyBtn").bind("click", replyWrite);
+			replyListUp();
 		});
 	</script>
 </body>

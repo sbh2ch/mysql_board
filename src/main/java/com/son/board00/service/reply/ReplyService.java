@@ -18,8 +18,8 @@ import com.son.board00.vo.reply.ReplyVO;
  * @author : kiost
  */
 public interface ReplyService {
-	public List<ReplyVO> write(Model model);
-	public List<ReplyVO> modify(Model model);
-	public List<ReplyVO> allReply(Model model);
-	public List<ReplyVO> delete(Model model);
+	public void write(Model model);
+	public void modify(Model model);
+	public String allReply(Model model);
+	public void delete(Model model);
 }
