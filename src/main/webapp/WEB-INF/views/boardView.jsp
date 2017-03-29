@@ -58,35 +58,34 @@
 			</form>
 		</div>
 		<div id="replyList">
-			<form action="" name="modForm">
-				<table border="1">
-					<thead>
-						<tr>
-							<th>writer</th>
-							<th>comment</th>
-							<th>reg_date</th>
-							<th>mod/del</th>
-						</tr>
-					</thead>
-					<tbody id="replyBody">
-					</tbody>
-				</table>
-			</form>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>writer</th>
+						<th>comment</th>
+						<th>reg_date</th>
+						<th>mod/del</th>
+					</tr>
+				</thead>
+				<tbody id="replyBody">
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<!-- JQuery Version 3.1.0 CDN -->
 	<script src="http://code.jquery.com/jquery-3.2.1.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var selectNum;
-		var replyListUp = function() {
+		var b_no = "${b.b_no}";
+		var replyListUp = function(b_no) {
 			var $replyBody = $("#replyBody");
-
+			console.log("listup b_no > > > > ", b_no);
 			$.ajax({
 				url : "reply_list_ajax.do",
 				type : "post",
 				datatype : 'json',
 				data : {
-					"b_no" : "${b.b_no}",
+					"b_no" : b_no,
 				},
 				success : function(data) {
 					console.log('success');
@@ -109,7 +108,7 @@
 		}
 
 		var bindModSubmitBtn = function() {
-			console.log('clicked = >', $("#replyModInput" + selectNum).children().first().val());
+			console.log("mod b_no > > > > ", b_no);
 			$.ajax({
 				url : "reply_mod_ajax.do",
 				type : "post",
@@ -120,7 +119,8 @@
 					"r_no" : selectNum
 				},
 				success : function(data) {
-					replyListUp();
+					replyListUp(b_no);
+					console.log('okay');
 				}
 			});
 		}
@@ -133,17 +133,17 @@
 				data : {
 					"email" : "${user.email}",
 					"content" : $("#replyContent").val(),
-					"b_no" : "${b.b_no}"
+					"b_no" : b_no
 				},
 				success : function(data) {
-					replyListUp();
+					replyListUp(b_no);
 				}
 			});
 		}
 
 		$(document).ready(function() {
 			$("#replyBtn").bind("click", replyWrite);
-			replyListUp();
+			replyListUp(b_no);
 		});
 	</script>
 </body>
