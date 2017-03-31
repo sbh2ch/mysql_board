@@ -63,6 +63,6 @@ This project runs in these enviroments below:
 >
 > * MySQL
 > * Spring 3.1
-> * JDK 8
+> * JDK 8_121
 > * MAVEN
 > * Tomcat 8
