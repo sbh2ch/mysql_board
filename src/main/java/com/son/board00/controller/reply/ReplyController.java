@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import com.son.board00.service.reply.ReplyService;
 
@@ -45,7 +47,7 @@ public class ReplyController {
 	public void addReply(HttpServletRequest req, HttpServletResponse res, Model model) {
 		model.addAttribute("req", req);
 		replyService.write(model);
-		
+
 		try {
 			res.getWriter().print("{}");
 		} catch (IOException e) {
@@ -68,24 +70,24 @@ public class ReplyController {
 	public void modReply(HttpServletRequest req, HttpServletResponse res, Model model) {
 		model.addAttribute("req", req);
 		replyService.modify(model);
-		
+
 		try {
 			res.getWriter().print("{}");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@RequestMapping("reply_del_ajax.do")
-	public void deleteReply(HttpServletRequest req, HttpServletResponse res, Model model){
+	public void deleteReply(HttpServletRequest req, HttpServletResponse res, Model model) {
 		model.addAttribute("req", req);
 		replyService.delete(model);
-		
+
 		try {
 			res.getWriter().print("{}");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

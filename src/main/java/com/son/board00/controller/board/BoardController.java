@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.son.board00.service.board.BoardService;
+import com.son.board00.service.file.FileService;
 
 /**
  * <pre>
@@ -25,7 +26,10 @@ import com.son.board00.service.board.BoardService;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-
+	
+	@Autowired
+	private FileService fileService;
+	
 	/**
 	 * <pre>
 	 * 1. 개요 : 글 리스트 불러오기
