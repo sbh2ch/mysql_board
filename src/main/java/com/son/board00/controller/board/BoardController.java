@@ -27,8 +27,8 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@Autowired
-	private FileService fileService;
+//	@Autowired
+//	private FileService fileService;
 	
 	/**
 	 * <pre>
